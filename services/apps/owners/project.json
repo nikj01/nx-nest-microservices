@@ -1,21 +1,21 @@
 {
-  "name": "services",
+  "name": "owners",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/services/src",
+  "sourceRoot": "apps/owners/src",
   "projectType": "application",
   "targets": {
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "services:build"
+        "buildTarget": "owners:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "services:build:development"
+          "buildTarget": "owners:build:development"
         },
         "production": {
-          "buildTarget": "services:build:production"
+          "buildTarget": "owners:build:production"
         }
       }
     }
