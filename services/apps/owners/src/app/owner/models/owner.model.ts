@@ -5,7 +5,7 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 @Schema()
 export class Owner extends Document implements IOwner {
   @Prop()
-  id?: number;
+  _id?: number;
 
   @Prop({ isRequired: true })
   surname: string;

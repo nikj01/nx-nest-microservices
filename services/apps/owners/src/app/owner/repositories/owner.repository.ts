@@ -14,8 +14,12 @@ export class OwnerRepository {
   }
 
   async updateOwner(owner: OwnerEntity) {
-    const { id, ...data } = owner;
-    return this.ownerModel.updateOne({ id }, { $set: { ...data } }).exec();
+    const { _id, ...data } = owner;
+    return this.ownerModel.updateOne({ _id: _id }, { $set: { ...data } }).exec();
+  }
+
+  async findOwners() {
+    return this.ownerModel.find().exec();
   }
 
   async findOwner(id: string) {
@@ -23,6 +27,6 @@ export class OwnerRepository {
   }
 
   async deleteOwner(id: string) {
-    this.ownerModel.deleteOne({ id }).exec();
+    this.ownerModel.deleteOne({ _id: id }).exec();
   }
 }
