@@ -1,12 +1,9 @@
 import { Document } from "mongoose";
-import { IOwner } from "../../../../../../interfaces/src/lib/owner.interface";
+import { IOwner } from "@services/interfaces";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 
 @Schema()
 export class Owner extends Document implements IOwner {
-  @Prop()
-  _id?: number;
-
   @Prop({ isRequired: true })
   surname: string;
 

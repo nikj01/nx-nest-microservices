@@ -1,12 +1,12 @@
-import { IOwner } from "@services/interfaces/src/lib/owner.interface";
+import { IOwner } from "@services/interfaces";
 
 export class OwnerEntity implements IOwner {
-  _id?: number;
+  _id?: string;
   surname: string;
   name: string;
   cars?: string[];
 
-  constructor(id: number, surname: string, name: string, cars: string[]) {
+  constructor(id: string, surname: string, name: string, cars: string[]) {
     this._id = id;
     this.surname = surname;
     this.name = name;

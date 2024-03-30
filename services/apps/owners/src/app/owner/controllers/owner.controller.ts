@@ -26,8 +26,8 @@ export class OwnerController {
     return this.ownerRepository.updateOwner(updatedOwner);
   }
 
-  @Delete("id")
-  deleteOwner(@Param() id: string) {
+  @Delete(":id")
+  deleteOwner(@Param("id") id: string) {
     return this.ownerRepository.deleteOwner(id);
   }
 }
