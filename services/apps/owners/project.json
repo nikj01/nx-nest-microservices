@@ -1,0 +1,24 @@
+{
+  "name": "owners",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/owners/src",
+  "projectType": "application",
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "owners:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "owners:build:development"
+        },
+        "production": {
+          "buildTarget": "owners:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,24 @@
+{
+  "name": "cars",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/cars/src",
+  "projectType": "application",
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "cars:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "cars:build:development"
+        },
+        "production": {
+          "buildTarget": "cars:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}
