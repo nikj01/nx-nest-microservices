@@ -39,3 +39,7 @@ testem.log
 Thumbs.db
 
 .nx/cache
+
+/envs/
+envs
+/apps/owners/mongo-data/
