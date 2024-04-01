@@ -18,5 +18,6 @@ import { getMongoConfig } from "./configs/mongo.config";
   ],
   controllers: [AppController],
   providers: [AppService],
+  exports: [],
 })
 export class AppModule {}
