@@ -5,29 +5,20 @@
 
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
-
 import { AppModule } from "./app/app.module";
-import { MicroserviceOptions, Transport } from "@nestjs/microservices";
+import { RmqService } from "@services/libs";
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
-    transport: Transport.RMQ,
-    options: {
-      urls: ["amqp://localhost:5672"],
-      queue: "owners_queue",
-      queueOptions: {
-        durable: false,
-      },
-    },
-  });
+  const app = await NestFactory.create(AppModule);
+  const rmqService = app.get<RmqService>(RmqService);
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
     }),
   );
-  const port = process.env.PORT || 3000;
-  await app.init();
-  Logger.log(`🚀 Application is running on: http://localhost:${port}`);
+  app.connectMicroservice(rmqService.getOptions("owners-service-queue"));
+  app.startAllMicroservices();
+  Logger.log(`🚀 Owners service is running`);
 }
 
 bootstrap();

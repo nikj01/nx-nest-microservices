@@ -20,12 +20,3 @@ const getMongoString = (configService: ConfigService) =>
   configService.get("MONGO_HOST") +
   ":" +
   configService.get("MONGO_PORT");
-// "/" +
-// configService.get("MONGO_DATABASE") +
-// "?authSource=" +
-// configService.get("MONGO_AUTHDATABASE");
-
-// const getMongoString = (configService: ConfigService) =>
-//   "mongodb://" + configService.get("MONGO_HOST") + ":" + configService.get("MONGO_PORT") + "/";
-
-// mongodb://localhost:27017

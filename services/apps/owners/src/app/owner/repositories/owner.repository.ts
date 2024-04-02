@@ -1,19 +1,18 @@
-import { Inject, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Owner } from "../models/owner.model";
 import { Model } from "mongoose";
 import { OwnerEntity } from "../entities/owner.entity";
-import { ClientProxy } from "@nestjs/microservices";
 
 @Injectable()
 export class OwnerRepository {
   constructor(
     @InjectModel(Owner.name) private readonly ownerModel: Model<Owner>,
-    @Inject("OWNERS_SERVICE") private readonly rabbitClient: ClientProxy,
-  ) {}
+  ) // @Inject(OWNERS_SERVICE) private readonly rabbitClient: ClientProxy,
+  {}
 
   async createOwner(owner: OwnerEntity) {
-    this.rabbitClient.emit("create-owner", owner);
+    // this.rabbitClient.emit("create-owner", owner);
     const newOwner = new this.ownerModel(owner);
     return newOwner.save();
   }

@@ -1,24 +1,16 @@
 import { Module } from "@nestjs/common";
 
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
-import { ClientsModule, Transport } from "@nestjs/microservices";
+import { RmqModule } from "@services/libs";
+import { OWNERS_SERVICE } from "@services/libs";
+import { ConfigModule } from "@nestjs/config";
 
 @Module({
   imports: [
-    ClientsModule.register([
-      {
-        name: "OWNERS_SERVICE",
-        transport: Transport.RMQ,
-        options: {
-          urls: ["amqp://localhost:5672"],
-          queue: "owners-queue",
-          queueOptions: {
-            durable: false,
-          },
-        },
-      },
-    ]),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: "envs/.owners.env",
+    }),
+    RmqModule.registerClientsModuleAsync(OWNERS_SERVICE),
   ],
   controllers: [],
   providers: [],
