@@ -25,6 +25,8 @@ export class RmqModule {
                 queueOptions: {
                   durable: false,
                 },
+                noAck: true,
+                persistent: true,
               },
             }),
             inject: [ConfigService],

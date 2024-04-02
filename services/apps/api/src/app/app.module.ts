@@ -3,6 +3,7 @@ import { Module } from "@nestjs/common";
 import { RmqModule } from "@services/libs";
 import { OWNERS_SERVICE } from "@services/libs";
 import { ConfigModule } from "@nestjs/config";
+import { OwnersModule } from "./owners/owners.module";
 
 @Module({
   imports: [
@@ -10,7 +11,7 @@ import { ConfigModule } from "@nestjs/config";
       isGlobal: true,
       envFilePath: "envs/.owners.env",
     }),
-    RmqModule.registerClientsModuleAsync(OWNERS_SERVICE),
+    OwnersModule,
   ],
   controllers: [],
   providers: [],

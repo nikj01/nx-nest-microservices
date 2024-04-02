@@ -1,12 +1,7 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app/app.module";
-import { RmqService } from "@services/libs";
+import { OWNERS_SERVICE, RmqService } from "@services/libs";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,7 +11,7 @@ async function bootstrap() {
       transform: true,
     }),
   );
-  app.connectMicroservice(rmqService.getOptions("owners-service-queue"));
+  app.connectMicroservice(rmqService.getOptions(OWNERS_SERVICE));
   app.startAllMicroservices();
   Logger.log(`🚀 Owners service is running`);
 }
