@@ -1,36 +1,34 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller } from "@nestjs/common";
 import { OwnerRepository } from "../repositories/owner.repository";
-import { EventPattern, MessagePattern } from "@nestjs/microservices";
+import { MessagePattern } from "@nestjs/microservices";
 import { OwnerEntity } from "../entities/owner.entity";
-import { IOwner } from "@services/interfaces";
-import { classToPlain, plainToInstance } from "class-transformer";
+import { plainToInstance } from "class-transformer";
+import { OwnerCreate, OwnerRead, OwnersRead } from "@services/libs";
 
 @Controller()
-export class OwnerController {
+export class OwnersController {
   constructor(private readonly ownerRepository: OwnerRepository) {}
 
-  @MessagePattern({ cmd: "ping" })
-  pong() {
-    return "pong";
-  }
+  // @MessagePattern({ cmd: "ping" })
+  // pong() {
+  //   return "pong";
+  // }
 
-  @MessagePattern({ cmd: "addNewOwner" })
-  createOwner(@Body() dto: IOwner) {
+  @MessagePattern(OwnerCreate.pattern)
+  createOwner(dto: OwnerCreate.Request) {
     const newOwner = plainToInstance(OwnerEntity, dto as OwnerEntity);
     return this.ownerRepository.createOwner(newOwner);
   }
 
-  @MessagePattern({ cmd: "getOwners" })
+  @MessagePattern(OwnersRead.pattern)
   getOwners() {
     return this.ownerRepository.findOwners();
   }
-  // }
-  //
-  // @Get(":id")
-  // getOwner(@Param("id") id: string) {
-  //   return this.ownerRepository.findOwner(id);
-  // }
-  //
+
+  @MessagePattern(OwnerRead.pattern)
+  getOwner(id: string) {
+    return this.ownerRepository.findOwner(id);
+  }
 
   //
   // @Patch()

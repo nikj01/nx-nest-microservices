@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Inject, Post } from "@nestjs/common";
+import { Body, Controller, Get, Inject, Param, Post } from "@nestjs/common";
+import { OwnerCreate, OwnerRead, OwnersRead } from "@services/libs";
 import { OWNERS_SERVICE } from "@services/libs";
 import { ClientProxy } from "@nestjs/microservices";
-import { map } from "rxjs";
 import { IOwner } from "@services/interfaces";
+import { CreateOwnerDto } from "./dtos/createOwnerDto";
 
 @Controller("owners")
 export class OwnersController {
@@ -20,12 +21,23 @@ export class OwnersController {
 
   @Get()
   getOwners() {
-    return this.ownersClient.send<string>({ cmd: "getOwners" }, {});
+    return this.ownersClient.send<OwnersRead.Response, OwnersRead.Request>(OwnersRead.pattern, {});
+  }
+
+  @Get(":id")
+  getOwner(@Param("id") _id: string) {
+    return this.ownersClient.send<OwnerRead.Response, OwnerRead.Request>(OwnerRead.pattern, {
+      _id,
+    });
   }
 
   @Post()
-  createOwner(@Body() dto: IOwner) {
-    return this.ownersClient.send({ cmd: "addNewOwner" }, { dto });
+  createOwner(@Body() dto: CreateOwnerDto) {
+    return this.ownersClient.send<OwnerCreate.Response, OwnerCreate.Request>(OwnerCreate.pattern, {
+      surname: dto.surname,
+      name: dto.name,
+      cars: dto.cars,
+    });
   }
 
   // @Get(":id")
