@@ -1,56 +1,56 @@
-import { Body, Controller, Get, Inject, Param, Post } from "@nestjs/common";
-import { OwnerCreate, OwnerRead, OwnersRead } from "@services/libs";
+import { Body, Controller, Delete, Get, Inject, Param, Patch, Post } from "@nestjs/common";
+import { OwnerCreate, OwnerDelete, OwnerRead, OwnerReadAll, OwnerUpdate } from "@services/libs";
 import { OWNERS_SERVICE } from "@services/libs";
 import { ClientProxy } from "@nestjs/microservices";
-import { IOwner } from "@services/interfaces";
-import { CreateOwnerDto } from "./dtos/createOwnerDto";
+import { OwnerCreateDto } from "./dtos/owner.create-dto";
+import { OwnerUpdateDto } from "./dtos/owner.update-dto";
+import { plainToInstance } from "class-transformer";
+import { OwnerGetDto } from "./dtos/owner.get-dto";
 
 @Controller("owners")
 export class OwnersController {
   constructor(@Inject(OWNERS_SERVICE) private readonly ownersClient: ClientProxy) {}
 
-  // @Get()
-  // pingService() {
-  //   const startTs = Date.now();
-  //   const pattern = { cmd: "ping" };
-  //   const payload = {};
-  //   return this.ownersClient
-  //     .send<string>(pattern, payload)
-  //     .pipe(map((message: string) => ({ message, duration: Date.now() - startTs })));
-  // }
+  @Post()
+  async createOwner(@Body() dto: OwnerCreateDto) {
+    const { surname, name, cars } = dto;
+    return this.ownersClient.send<OwnerCreate.Response, OwnerCreate.Request>(OwnerCreate.pattern, {
+      surname,
+      name,
+      cars,
+    });
+  }
 
   @Get()
-  getOwners() {
-    return this.ownersClient.send<OwnersRead.Response, OwnersRead.Request>(OwnersRead.pattern, {});
+  async getOwners() {
+    return this.ownersClient.send<OwnerReadAll.Response, OwnerReadAll.Request>(
+      OwnerReadAll.pattern,
+      {},
+    );
   }
 
   @Get(":id")
-  getOwner(@Param("id") _id: string) {
+  async getOwner(@Param("id") _id: string) {
     return this.ownersClient.send<OwnerRead.Response, OwnerRead.Request>(OwnerRead.pattern, {
       _id,
     });
   }
 
-  @Post()
-  createOwner(@Body() dto: CreateOwnerDto) {
-    return this.ownersClient.send<OwnerCreate.Response, OwnerCreate.Request>(OwnerCreate.pattern, {
-      surname: dto.surname,
-      name: dto.name,
-      cars: dto.cars,
+  @Patch(":id")
+  async updateOwner(@Param("id") _id: string, @Body() dto: OwnerUpdateDto) {
+    const { surname, name, cars } = dto;
+    return this.ownersClient.send<OwnerUpdate.Response, OwnerUpdate.Request>(OwnerUpdate.pattern, {
+      _id,
+      surname,
+      name,
+      cars,
     });
   }
 
-  // @Get(":id")
-  // getOwner(@Param("id") id: string) {
-  // }
-  //
-
-  //
-  // @Patch()
-  // updateOwner(@Body() ) {
-  // }
-  //
-  // @Delete(":id")
-  // deleteOwner(@Param("id") id: string) {
-  // }
+  @Delete(":id")
+  async deleteOwner(@Param("id") _id: string) {
+    return this.ownersClient.send<OwnerDelete.Response, OwnerDelete.Request>(OwnerDelete.pattern, {
+      _id,
+    });
+  }
 }

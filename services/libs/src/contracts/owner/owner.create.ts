@@ -1,7 +1,7 @@
 import { IsArray, IsOptional, IsString } from "class-validator";
 
 export namespace OwnerCreate {
-  export const pattern = { cmd: "owner.create.message" };
+  export const pattern = { cmd: "owner.create-owner.message" };
 
   export class Request {
     @IsString()

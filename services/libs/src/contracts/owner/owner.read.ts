@@ -1,7 +1,7 @@
 import { IsArray, IsOptional, IsString } from "class-validator";
 
 export namespace OwnerRead {
-  export const pattern = { cmd: "owner.read.message" };
+  export const pattern = { cmd: "owner.read-owner.message" };
 
   export class Request {
     _id: string;

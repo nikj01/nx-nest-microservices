@@ -6,13 +6,9 @@ import { OwnerEntity } from "../entities/owner.entity";
 
 @Injectable()
 export class OwnerRepository {
-  constructor(
-    @InjectModel(Owner.name) private readonly ownerModel: Model<Owner>,
-  ) // @Inject(OWNERS_SERVICE) private readonly rabbitClient: ClientProxy,
-  {}
+  constructor(@InjectModel(Owner.name) private readonly ownerModel: Model<Owner>) {}
 
   async createOwner(owner: OwnerEntity) {
-    // this.rabbitClient.emit("create-owner", owner);
     const newOwner = new this.ownerModel(owner);
     return newOwner.save();
   }
@@ -26,11 +22,11 @@ export class OwnerRepository {
     return this.ownerModel.find().exec();
   }
 
-  async findOwner(id: string) {
-    return this.ownerModel.findById(id).exec();
+  async findOwner(_id: string) {
+    return this.ownerModel.findById(_id).exec();
   }
 
-  async deleteOwner(id: string) {
-    this.ownerModel.deleteOne({ _id: id }).exec();
+  async deleteOwner(_id: string) {
+    this.ownerModel.deleteOne({ _id: _id }).exec();
   }
 }

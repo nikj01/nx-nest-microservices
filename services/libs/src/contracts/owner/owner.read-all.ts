@@ -1,6 +1,6 @@
 import { IsArray, IsOptional, IsString } from "class-validator";
 
-export namespace OwnersRead {
+export namespace OwnerReadAll {
   export const pattern = { cmd: "owner.read-all.message" };
 
   export class Request {}
