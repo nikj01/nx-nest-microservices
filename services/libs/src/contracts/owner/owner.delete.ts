@@ -1,7 +1,7 @@
 import { IsString } from "class-validator";
 
 export namespace OwnerDelete {
-  export const pattern = { cmd: "owner.update-owner.message" };
+  export const pattern = { cmd: "owner.delete-owner.message" };
 
   export class Request {
     @IsString()

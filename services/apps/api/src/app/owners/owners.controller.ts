@@ -4,8 +4,6 @@ import { OWNERS_SERVICE } from "@services/libs";
 import { ClientProxy } from "@nestjs/microservices";
 import { OwnerCreateDto } from "./dtos/owner.create-dto";
 import { OwnerUpdateDto } from "./dtos/owner.update-dto";
-import { plainToInstance } from "class-transformer";
-import { OwnerGetDto } from "./dtos/owner.get-dto";
 
 @Controller("owners")
 export class OwnersController {

@@ -1,3 +1,3 @@
-import { OwnerGetDto } from "./owner.get-dto";
+import { OwnerCreateDto } from "./owner.create-dto";
 
-export class OwnerUpdateDto extends OwnerGetDto {}
+export class OwnerUpdateDto extends OwnerCreateDto {}
