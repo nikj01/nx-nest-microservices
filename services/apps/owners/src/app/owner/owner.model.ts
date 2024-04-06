@@ -1,9 +1,8 @@
 import { Document } from "mongoose";
-import { IOwner } from "@services/interfaces";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 
 @Schema()
-export class Owner extends Document implements IOwner {
+export class Owner extends Document {
   @Prop({ isRequired: true })
   surname: string;
 

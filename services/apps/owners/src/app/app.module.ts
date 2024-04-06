@@ -1,11 +1,10 @@
 import { Module } from "@nestjs/common";
 
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
 import { ConfigModule } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
 import { OwnerModule } from "./owner/owner.module";
 import { getMongoConfig } from "./configs/mongo.config";
+import { RmqModule } from "@services/libs";
 
 @Module({
   imports: [
@@ -14,9 +13,11 @@ import { getMongoConfig } from "./configs/mongo.config";
       envFilePath: "envs/.owners.env",
     }),
     MongooseModule.forRootAsync(getMongoConfig()),
+    RmqModule,
     OwnerModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
+  exports: [],
 })
 export class AppModule {}

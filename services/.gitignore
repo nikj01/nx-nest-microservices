@@ -39,6 +39,5 @@ testem.log
 Thumbs.db
 
 .nx/cache
-
 /envs/
 /apps/owners/mongo-data/

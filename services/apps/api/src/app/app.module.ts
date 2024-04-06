@@ -1,11 +1,19 @@
 import { Module } from "@nestjs/common";
 
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
+import { RmqModule } from "@services/libs";
+import { OWNERS_SERVICE } from "@services/libs";
+import { ConfigModule } from "@nestjs/config";
+import { OwnersModule } from "./owners/owners.module";
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: "envs/.owners.env",
+    }),
+    OwnersModule,
+  ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

@@ -1,6 +1,4 @@
-import { IOwner } from "@services/interfaces";
-
-export class OwnerEntity implements IOwner {
+export class OwnerEntity {
   _id?: string;
   surname: string;
   name: string;

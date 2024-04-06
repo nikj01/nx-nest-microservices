@@ -1,13 +1,14 @@
 import { Module } from "@nestjs/common";
-import { OwnerRepository } from "./repositories/owner.repository";
+import { OwnerRepository } from "./owner.repository";
 import { MongooseModule } from "@nestjs/mongoose";
-import { Owner, OwnerSchema } from "./models/owner.model";
-import { OwnerController } from "./controllers/owner.controller";
+import { Owner, OwnerSchema } from "./owner.model";
+import { OwnerCommands } from "./owner.commands";
+import { OwnerService } from "./owner.service";
 
 @Module({
   imports: [MongooseModule.forFeature([{ name: Owner.name, schema: OwnerSchema }])],
-  providers: [OwnerRepository],
-  controllers: [OwnerController],
+  providers: [OwnerService, OwnerRepository],
+  controllers: [OwnerCommands],
   exports: [],
 })
 export class OwnerModule {}
