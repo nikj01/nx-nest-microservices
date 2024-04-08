@@ -1,11 +1,11 @@
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app/app.module";
-import { OWNERS_SERVICE, RmqService } from "@services/libs";
+import { OWNERS_SERVICE, RmqConfig } from "@services/libs";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const rmqService = app.get<RmqService>(RmqService);
+  const rmqService = app.get<RmqConfig>(RmqConfig);
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
