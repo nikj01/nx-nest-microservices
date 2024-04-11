@@ -1,0 +1,48 @@
+services:
+  postgres:
+    container_name: "postgres"
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: test_db
+      PGDATA: /data/postgres
+    volumes:
+      - ./postgres:/data/postgres
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    container_name: "pgadmin"
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin
+    ports:
+      - "5430:80"
+    depends_on:
+      - postgres
+
+  mongo:
+    container_name: "mongodb"
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo-data:/data/db
+
+  rabbitmq3:
+    container_name: "rabbitmq"
+    image: "rabbitmq:3.10.13-management"
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"

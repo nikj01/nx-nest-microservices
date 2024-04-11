@@ -40,4 +40,5 @@ Thumbs.db
 
 .nx/cache
 /envs/
-/apps/owners/mongo-data/
+/docker/pg/pgadmin/
+/docker/pg/postgres/

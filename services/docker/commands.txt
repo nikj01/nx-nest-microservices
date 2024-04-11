@@ -1,0 +1,6 @@
+# pg
+# for mongo -- just change filename to docker-compose-mongo.yml
+docker-compose -f docker-compose-pg.yml up -d
+
+# default
+docker-compose up -d
