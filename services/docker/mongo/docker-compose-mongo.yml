@@ -1,0 +1,20 @@
+services:
+  mongo:
+    container_name: "mongodb"
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo-data:/data/db
+
+  rabbitmq3:
+    container_name: "rabbitmq"
+    image: "rabbitmq:3.10.13-management"
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"

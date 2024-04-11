@@ -6,6 +6,16 @@
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/services/.nx/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/services/docker/mongo/mongo-data" />
+      <excludeFolder url="file://$MODULE_DIR$/services/docker/pg/pgadmin" />
+      <excludeFolder url="file://$MODULE_DIR$/services/docker/pg/postgres" />
+      <excludeFolder url="file://$MODULE_DIR$/services/docker/pg/postgres/base" />
+      <excludeFolder url="file://$MODULE_DIR$/services/docker/pg/postgres/global" />
+      <excludeFolder url="file://$MODULE_DIR$/services/docker/pg/postgres/pg_logical" />
+      <excludeFolder url="file://$MODULE_DIR$/services/docker/pg/postgres/pg_multixact" />
+      <excludeFolder url="file://$MODULE_DIR$/services/docker/pg/postgres/pg_subtrans" />
+      <excludeFolder url="file://$MODULE_DIR$/services/docker/pg/postgres/pg_wal" />
+      <excludeFolder url="file://$MODULE_DIR$/services/docker/pg/postgres/pg_xact" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

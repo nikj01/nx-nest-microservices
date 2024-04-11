@@ -132,3 +132,5 @@ dist
 /services/envs/
 /services/docker/pg/pgadmin/
 /services/docker/pg/postgres/
+/services/docker/pg/postgres/pg_stat/
+/services/docker/mongo/mongo-data/
